@@ -40,13 +40,18 @@ export default function App() {
     )
   }
 
-  if (!itinerary) {
+  if (!itinerary || !supabase) {
     return (
       <div className="page" style={{ justifyContent: 'center', alignItems: 'center', gap: 12 }}>
         <div style={{ fontSize: 32 }}>❌</div>
-        <p style={{ color: 'var(--danger)', fontSize: 14, textAlign: 'center', padding: '0 24px' }}>
-          無法連線到資料庫，請確認 Supabase 資料表已建立。
-        </p>
+        <div style={{ color: 'var(--danger)', fontSize: 14, textAlign: 'center', padding: '0 24px', lineHeight: 1.6 }}>
+          <p style={{ fontWeight: 600, marginBottom: 8 }}>無法連線到資料庫</p>
+          <p>請確認兩件事：</p>
+          <ol style={{ textAlign: 'left', marginTop: 8, paddingLeft: 20 }}>
+            <li>專案根目錄是否有 <code>.env</code> 檔案，並且填妥了 <code>VITE_SUPABASE_URL</code> 與 <code>VITE_SUPABASE_ANON_KEY</code>。</li>
+            <li>Supabase 專案中是否已執行 SQL 建立資料表。</li>
+          </ol>
+        </div>
       </div>
     )
   }
